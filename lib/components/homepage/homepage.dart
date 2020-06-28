@@ -1,19 +1,8 @@
-import 'package:expenses/components/homepage/homepage.dart';
+import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
 
+import 'card-list.dart';
 
-main() => runApp(ExpensesApp());
-
-// Componente ExpensesApp
-class ExpensesApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(home: MyHomePage());
-  }
-}
-
-/*
-// Componente Home
 class MyHomePage extends StatelessWidget {
   
   // var temporaria de lista de transações
@@ -52,9 +41,7 @@ class MyHomePage extends StatelessWidget {
                            ),
                            Column(                                     // Criamos um acoluna que tem um filho 
                              children: _transactions.map((tr){         // recebendo um mapeamento da lista de transações
-                               return Card(                            // que é um card  e possui
-                                 child: Text(tr.title)                 // um filho text com o titulo do card
-                                 );
+                               return CardList(tr);
                              }).toList(),                              // convertemos o mapeamento para uma lista
                            )
                           ]
@@ -63,4 +50,3 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
-*/
