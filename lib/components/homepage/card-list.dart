@@ -1,6 +1,7 @@
 
 import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CardList extends StatelessWidget {
   final Transaction tr;
@@ -13,6 +14,7 @@ class CardList extends StatelessWidget {
         child: Row(                                                            // dentro de uma linha
                     children : <Widget>[                                       // com filho do tipo Widgets
                          Container(                                            // dentro de um container
+                                   width: 100,                                 // tamanho fixo
                                    margin:EdgeInsets.symmetric(                // definimos uma margin                              
                                      horizontal: 15,                           // com valores tanto Horizontal
                                      vertical: 10                              // quando Vertical 
@@ -25,10 +27,11 @@ class CardList extends StatelessWidget {
                                    ),
                                    padding: EdgeInsets.all(10),                // definindo um espaço de 10 para todos os lados
                                    child: Text(
-                                               tr.value.toString(),                             // demonstrando o valor
+                                               'R\$ ${tr.value.toStringAsFixed(2)}',
+                                               //tr.value.toString(),                             // demonstrando o valor
                                                style: TextStyle(                                // definindo o estilo e fonte do texto      
                                                                 fontWeight:  FontWeight.bold,
-                                                                fontSize: 20,
+                                                                fontSize: 14,
                                                                 color: Colors.purple
                                                                ),
                                               )
@@ -46,10 +49,10 @@ class CardList extends StatelessWidget {
                                                                ),
                                                      ), 
                                                    Text(
-                                                     tr.date.toString(),
+                                                     DateFormat('d MMM y').format(tr.date),
                                                      style: TextStyle(                                // definindo o estilo e fonte do texto      
                                                                 fontWeight:  FontWeight.bold,
-                                                                fontSize: 16,                         // tamanho da fonte
+                                                                fontSize: 12,                         // tamanho da fonte
                                                                 color: Colors.grey[600]               // cor da fonte
                                                                ),
                                                      ),
