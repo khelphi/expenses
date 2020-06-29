@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-class CardNewTransaction extends StatelessWidget {
-  //final Transaction tr;
+class TransactionForm extends StatelessWidget {
 
-  //const CardNewTransaction(this.tr);
+  //String _title;
+  //String _value;
+  final _titleController = TextEditingController();
+  final _valueController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +16,13 @@ class CardNewTransaction extends StatelessWidget {
         child: Column(                                                 // criamos uma coluna com 
           children: <Widget>[                                          // un filho Widget
             TextField(                                                 // com um campo de Título
+              //onChanged: (newValue) => _title = newValue,              // obtendo o valor do textbox para uma variável
+              controller: _titleController,                            // Obtendo os valores pelo controler do textfield
               decoration: InputDecoration(labelText: 'Título'),        // um label 
             ), 
             TextField(                                                 // outro campo  de Valor
+              controller: _valueController,                            // Obtendo os valores pelo controler do textfield
+              //onChanged: (newValue) => _value = newValue,              // obtendo o valor do textbox para uma variável
               decoration: InputDecoration(labelText: 'Valor (R\$)'),   // um ladel
             ),
             Row(                                                       // adicionamos uma linha
@@ -25,7 +31,12 @@ class CardNewTransaction extends StatelessWidget {
                 FlatButton(                                            // um botão
                   child: Text('Nova Transação'),                       // um filho de text "Nova Transação"
                   textColor: Colors.purple,                            // cor roxo
-                  onPressed: () {},                                    // função do botão 
+                  onPressed: () {
+                    //print(_title);
+                    //print(_value);
+                    print(_titleController.text);
+                    print(_valueController.text);
+                  },                                    // função do botão 
                 ),
               ],
             )

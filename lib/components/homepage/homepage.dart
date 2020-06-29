@@ -1,32 +1,7 @@
-import 'package:expenses/models/transaction.dart';
+import 'package:expenses/components/transaction/transaction-user.dart';
 import 'package:flutter/material.dart';
 
-import 'card-list.dart';
-import 'card-new-transaction.dart';
-
 class MyHomePage extends StatelessWidget {
-  
-  // var temporaria de lista de transações
-  final _transactions =[
-    Transaction(
-               id: 't1',
-               title:'Pizza',
-               value: 39.00,
-               date: DateTime.now()
-     ),
-     Transaction(
-               id: 't2',
-               title:'Café Dolce Gusto',
-               value: 46.00,
-               date: DateTime.now()
-     ),
-     Transaction(
-               id: 't3',
-               title:'Aluguel',
-               value: 1648.80,
-               date: DateTime.now()
-     ),
-  ];
   
   @override
   Widget build(BuildContext context) {
@@ -46,44 +21,7 @@ class MyHomePage extends StatelessWidget {
                                 elevation: 5,                          // formato sombreado
                              ),
                            ),
-                           Column(                                     // Criamos um acoluna que tem um filho 
-                             children: _transactions.map((tr){         // recebendo um mapeamento da lista de transações
-                               return CardList(tr);
-                             }).toList(),                              // convertemos o mapeamento para uma lista
-                           ),
-                            CardNewTransaction(),
-                            /*
-                            Card(
-                              elevation: 5,
-                              child: Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Column(
-                                  children: <Widget>[
-                                    TextField(
-                                      decoration: InputDecoration(
-                                        labelText: 'Título'
-                                      ),
-                                    ),
-                                    TextField(
-                                                decoration: InputDecoration(
-                                                                             labelText: 'Valor (R\$)',
-                                                                           ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: <Widget>[
-                                        FlatButton(
-                                                   child: Text('Nova Transação'),
-                                                   textColor: Colors.purple,
-                                                   onPressed: (){},
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            )
-                            */  
+                           TransactionUser(),
                           ]
         
       )
