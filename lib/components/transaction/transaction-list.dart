@@ -13,7 +13,19 @@ class TransactionList extends StatelessWidget {
     
     return Container(                                                  // envolvemos a lista em um container para
       height: 385,                                                     // um tamenho definido por conta de que
-      child: ListView.builder(                                         // Criamos um ListView que tem um filho 
+      child: transactions.isEmpty ? Column(children:<Widget>[
+        SizedBox(height: 20),
+        Text('Nenhuma Transação cadastrada...',
+        style: Theme.of(context).textTheme.title,
+        ),
+        SizedBox(height: 20),
+        Container(
+          height: 150,
+          child: Image.asset('assets/images/waiting.png',
+          fit: BoxFit.cover,),
+        )
+      ],) :  
+      ListView.builder(                                         // Criamos um ListView que tem um filho 
                  itemCount: transactions.length,                       // definindo o tamanho do list view para
                  itemBuilder: (ctx,index){                             // não carregar tudo de uma vez...
                      final tr = transactions[index];
@@ -29,6 +41,7 @@ class TransactionList extends StatelessWidget {
                                                 decoration: BoxDecoration(                  // estilos de layout
                                                   border: Border.all(                       // Borda para todos os lados
                                                     color: Colors.purple[50],               // na cor roxo com um valor de tonalidade[50]
+                                                    //color: Theme.of(context).primaryColor,
                                                     width: 2,                               // com o width de 2
                                                   )
                                                 ),
@@ -40,6 +53,7 @@ class TransactionList extends StatelessWidget {
                                                                              fontWeight:  FontWeight.bold,
                                                                              fontSize: 14,
                                                                              color: Colors.purple
+                                                                             //color: Theme.of(context).primaryColor,
                                                                             ),
                                                            )
                                                ),
@@ -48,12 +62,16 @@ class TransactionList extends StatelessWidget {
                                              children: <Widget>[                                    
                                                                 Text(
                                                                   tr.title,
+                                                                  style: Theme.of(context).textTheme.title,
+                                                                  /*
                                                                   style: TextStyle(                                // definindo o estilo e fonte do texto      
                                                                              fontWeight:  FontWeight.bold,
                                                                              fontSize: 16,                         // tamanho da fonte
                                                                              color: Colors.grey[600]               // cor da fonte
                                                                             ),
+                                                                            */
                                                                   ), 
+                                                                  
                                                                 Text(
                                                                   DateFormat('d MMM y').format(tr.date),
                                                                   style: TextStyle(                                // definindo o estilo e fonte do texto      

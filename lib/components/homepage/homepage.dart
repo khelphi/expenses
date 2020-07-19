@@ -13,13 +13,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   // var temporaria de lista de transações
-  final transactions = [
+  final List<Transaction> transactions = [
+    /*
     Transaction(id: 't1', title: 'Pizza', value: 39.00, date: DateTime.now()),
     Transaction(id: 't2', title: 'Café Dolce Gusto',value: 46.00,date: DateTime.now()),
     //Transaction(id: 't3', title: 'Aluguel', value: 1648.80, date: DateTime.now()),
     //Transaction(id: 't4', title: 'Xbox Game Pass', value: 39.90, date: DateTime.now()),
     //Transaction(id: 't5', title: 'Loja Dotz', value: 514.00, date: DateTime.now()),
     //Transaction(id: 't6', title: 'Mercado', value: 180.75, date: DateTime.now()),
+    */
   ];
 
   // Metodo responsável por adicionar itens na lista
@@ -66,7 +68,11 @@ openTransactionFormModal(BuildContext context,){
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(                                                  // Barra principal
-        title: Text('Despesas Pessoais'),                              // Titulo da barra 
+        title: Text('Despesas Pessoais',
+                     style: TextStyle(
+                                      fontFamily: 'OpenSans'
+                                     ),
+        ),                              // Titulo da barra 
         actions: <Widget>[                                             // criando actions para a appbar
                         IconButton(
                           icon: Icon(Icons.add),
@@ -84,7 +90,8 @@ openTransactionFormModal(BuildContext context,){
                        Container(                                        // container
                          width: double.infinity,                         // definindo o tamanho do Contatiner
                             child: Card(                                 // widget child Cards
-                            color: Colors.blue,                          // Cor do Card
+                            //color: Colors.blue,                          // Cor do Card
+                            color: Theme.of(context).primaryColor,
                             child: Text('Grafico'),                      // texto
                             elevation: 5,                                // formato sombreado
                          ),
