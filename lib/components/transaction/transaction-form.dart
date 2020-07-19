@@ -7,6 +7,12 @@ class TransactionForm extends StatelessWidget {
   final _titleController = TextEditingController();
   final _valueController = TextEditingController();
 
+  //Criamos uma function para que transite as informações oara o TransactionForm
+  final void Function(String, double) onSubmit;
+
+  //Construtor de TransactionForm recebendo apenas o retorno da função
+  TransactionForm(this.onSubmit);
+
   @override
   Widget build(BuildContext context) {
     return Card(                                                       // Criamos um novo card
@@ -34,8 +40,12 @@ class TransactionForm extends StatelessWidget {
                   onPressed: () {
                     //print(_title);
                     //print(_value);
-                    print(_titleController.text);
-                    print(_valueController.text);
+                    
+                    final title = _titleController.text;
+                    final value = double.tryParse(_valueController.text) ?? 0.00;
+                    onSubmit(title, value);
+                    //print(_titleController.text);
+                    //print(_valueController.text);
                   },                                    // função do botão 
                 ),
               ],
