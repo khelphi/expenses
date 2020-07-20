@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:expenses/components/chart/chart.dart';
 import 'package:expenses/components/transaction/transaction-form.dart';
 import 'package:expenses/components/transaction/transaction-list.dart';
 import 'package:expenses/models/transaction.dart';
@@ -14,15 +15,26 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   // var temporaria de lista de transações
   final List<Transaction> transactions = [
-    /*
-    Transaction(id: 't1', title: 'Pizza', value: 39.00, date: DateTime.now()),
-    Transaction(id: 't2', title: 'Café Dolce Gusto',value: 46.00,date: DateTime.now()),
-    //Transaction(id: 't3', title: 'Aluguel', value: 1648.80, date: DateTime.now()),
-    //Transaction(id: 't4', title: 'Xbox Game Pass', value: 39.90, date: DateTime.now()),
-    //Transaction(id: 't5', title: 'Loja Dotz', value: 514.00, date: DateTime.now()),
+    
+    Transaction(id: 't1', title: 'Pizza', value: 39.00, date: DateTime.now().subtract(Duration(days:4))),
+    Transaction(id: 't2', title: 'Café Dolce Gusto',value: 46.00,date: DateTime.now().subtract(Duration(days:3))),
+    Transaction(id: 't3', title: 'Aluguel', value: 1648.80, date: DateTime.now().subtract(Duration(days:2))),
+    //Transaction(id: 't4', title: 'Xbox Game Pass', value: 39.90, date: DateTime.now().subtract(Duration(days:33))),
+    Transaction(id: 't5', title: 'Loja Dotz', value: 514.00, date: DateTime.now()),
     //Transaction(id: 't6', title: 'Mercado', value: 180.75, date: DateTime.now()),
-    */
+    
   ];
+
+
+  List<Transaction> get recentTransactions{
+    return transactions.where((tr){
+       return tr.date.isAfter(DateTime.now().subtract(
+         Duration(days:7),
+       ));
+
+    }
+    ).toList();
+  }
 
   // Metodo responsável por adicionar itens na lista
   addTransaction(String _title, double _value){
@@ -87,6 +99,7 @@ openTransactionFormModal(BuildContext context,){
               child: Column(                                                    // Corpo
           crossAxisAlignment: CrossAxisAlignment.stretch,                // Definindo os eixos cruzado inicial    
           children: <Widget>[                                            // Widget filho que contem outros containers
+                       /*
                        Container(                                        // container
                          width: double.infinity,                         // definindo o tamanho do Contatiner
                             child: Card(                                 // widget child Cards
@@ -96,7 +109,9 @@ openTransactionFormModal(BuildContext context,){
                             elevation: 5,                                // formato sombreado
                          ),
                        ),
-                         TransactionList(transactions),
+                       */
+                      Chart(recentTransactions),
+                      TransactionList(transactions),
                       ]
             
         ),
