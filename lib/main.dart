@@ -25,7 +25,7 @@ class ExpensesApp extends StatelessWidget {
       supportedLocales: [const Locale('pt', 'BR')],
       home: MyHomePage(), 
     theme: ThemeData(
-      primarySwatch : Colors.purple,
+      primarySwatch : Colors.red,
       accentColor: Colors.amber,
       fontFamily: 'Quicksand',
       

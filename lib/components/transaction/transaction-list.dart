@@ -40,7 +40,7 @@ class TransactionList extends StatelessWidget {
                                                 ),
                                                 decoration: BoxDecoration(                  // estilos de layout
                                                   border: Border.all(                       // Borda para todos os lados
-                                                    color: Colors.purple[50],               // na cor roxo com um valor de tonalidade[50]
+                                                    color: Colors.red[50],                  // na cor roxo com um valor de tonalidade[50]
                                                     //color: Theme.of(context).primaryColor,
                                                     width: 2,                               // com o width de 2
                                                   )
@@ -52,7 +52,7 @@ class TransactionList extends StatelessWidget {
                                                             style: TextStyle(                                // definindo o estilo e fonte do texto      
                                                                              fontWeight:  FontWeight.bold,
                                                                              fontSize: 14,
-                                                                             color: Colors.purple
+                                                                             color: Colors.red
                                                                              //color: Theme.of(context).primaryColor,
                                                                             ),
                                                            )

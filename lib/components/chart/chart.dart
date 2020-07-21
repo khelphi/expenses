@@ -13,27 +13,6 @@ final List<Transaction> recentTransactions;
 
 Chart(this.recentTransactions);
 
-String daysTranslate(int par) {
-    
-    switch (par) {
-          case 1:
-            return "seg";
-          case 2:
-            return "ter";
-          case 3:
-            return "qua"; 
-          case 4:
-            return "qui";
-          case 5:
-            return "sex";
-          case 6:
-            return "sab";
-          case 7:
-            return "dom";
-        }
-    return '';
-  }
-
 List<Map<String, Object>> get groupedTransactions {
    return List.generate(7, (index) {
       
@@ -45,25 +24,14 @@ List<Map<String, Object>> get groupedTransactions {
       );
 
       String dayLetter = DateFormat.E().format(weekDay)[0];
-      String dayLetterBr = DateFormat.E('pt_BR').format(weekDay)[0];
+      String dayLetterBr = DateFormat.E('pt_BR').format(weekDay);
 
-      //String dayLetterBr = daysTranslate(index);
+      
 
 
       double totalSum = 0.0;
 
-      /*
-      recentTransactions.forEach((Transaction tr) { 
-        bool samDay = tr.date.day == weekDay.day;
-        bool samMonth = tr.date.month == weekDay.month;
-        bool samYear = tr.date.year == weekDay.year;
-
-        if (samDay && samMonth && samYear)
-        totalSum += tr.value;
-      });
-      */
-
-      
+     
       for (var i = 0; i < recentTransactions.length; i++)
       {
         bool samDay = recentTransactions[i].date.day == weekDay.day;
@@ -76,7 +44,7 @@ List<Map<String, Object>> get groupedTransactions {
       
 
       return {
-              'day': dayLetter+'-'+dayLetterBr,
+              'day': dayLetterBr,
               'value': totalSum};
              }
 
@@ -84,21 +52,35 @@ List<Map<String, Object>> get groupedTransactions {
      
 }
 
+double get _weekTotalValue {
+  return groupedTransactions.fold(0.0, (sum,tr) {
+         return sum + tr['value'];
+  });
+}
+
+
 @override
 Widget build(BuildContext context) { 
-  groupedTransactions;
+  
    return Card(
               elevation: 6,
               margin: EdgeInsets.all(20),
-              child: Row(
-                           children: groupedTransactions.map((tr) {
-                             return ChartBar(
-                               label: tr['day'],
-                               value: tr['value'],
-                               percentage: 0.5,
-                             );
-                           }).toList(),
-                        ), 
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                             children: groupedTransactions.map((tr) {
+                               return Flexible(
+                                 fit: FlexFit.tight,
+                                   child: ChartBar(
+                                   label: tr['day'],
+                                   value: tr['value'],
+                                   percentage: (tr['value'] as double) / _weekTotalValue,
+                                 ),
+                               );
+                             }).toList(),
+                          ),
+              ), 
               );
 
     }
